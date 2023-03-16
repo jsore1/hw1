@@ -4,25 +4,24 @@ const Header = (props) => {
   );
 };
 
-const PartOfContent = (props) => {
+const PartOfContent = ({part, exercises}) => {
   return (
-    <p>{props.part} {props.exercises}</p>
+    <p>{part} {exercises}</p>
   );
 };
 
-const Content = (props) => {
+const Content = ({parts, exercises}) => {
+  const partsOfContent = exercises.map((exercise, index) => <PartOfContent key={exercise + ""} part={parts[index]} exercises={exercise} />)
   return (
     <div>
-      <PartOfContent part={props.parts[0]} exercises={props.exercises[0]} />
-      <PartOfContent part={props.parts[1]} exercises={props.exercises[1]} />
-      <PartOfContent part={props.parts[2]} exercises={props.exercises[2]} />
+      {partsOfContent}
     </div>
   );
 };
 
-const Total = (props) => {
+const Total = ({exercises}) => {
   let totalExercises = 0;
-  props.exercises.forEach(exercise => {
+  exercises.forEach(exercise => {
     totalExercises += exercise;
   });
   return (
